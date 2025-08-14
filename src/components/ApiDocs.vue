@@ -1,7 +1,7 @@
 <template>
   <div class="api-docs">
     <div class="docs-header">
-      <h1 class="docs-title">PanSou API 文档</h1>
+      <h1 class="docs-title">清羽盘搜 API 文档</h1>
       <p class="docs-subtitle">网盘资源搜索API服务</p>
     </div>
 
@@ -689,7 +689,7 @@ const copyToClipboard = async (text: string) => {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-family: "Zhuque Fangsong (technical preview)", "Noto Sans SC", sans-serif;
 }
 
 .docs-header {
@@ -758,7 +758,7 @@ const copyToClipboard = async (text: string) => {
   color: hsl(var(--accent-foreground));
   padding: 0.25rem 0.75rem;
   border-radius: 6px;
-  font-family: 'Monaco', 'Menlo', monospace;
+  font-family: "Zhuque Fangsong (technical preview)", "Noto Sans SC", sans-serif;
   font-size: 0.875rem;
 }
 
@@ -845,7 +845,7 @@ const copyToClipboard = async (text: string) => {
 }
 
 .endpoint-url {
-  font-family: 'Monaco', 'Menlo', monospace;
+  font-family: "Zhuque Fangsong (technical preview)", "Noto Sans SC", sans-serif;
   background: hsl(var(--background));
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -900,13 +900,13 @@ const copyToClipboard = async (text: string) => {
 }
 
 .param-name {
-  font-family: 'Monaco', 'Menlo', monospace;
+  font-family: "Zhuque Fangsong (technical preview)", "Noto Sans SC", sans-serif;
   font-weight: 600;
   color: #1d4ed8;
 }
 
 .param-type {
-  font-family: 'Monaco', 'Menlo', monospace;
+  font-family: "Zhuque Fangsong (technical preview)", "Noto Sans SC", sans-serif;
   color: hsl(var(--muted-foreground));
   font-size: 0.875rem;
 }
@@ -969,7 +969,7 @@ const copyToClipboard = async (text: string) => {
 .form-textarea {
   min-height: 100px;
   resize: vertical;
-  font-family: 'Monaco', 'Menlo', monospace;
+  font-family: "Zhuque Fangsong (technical preview)", "Noto Sans SC", sans-serif;
 }
 
 .form-checkbox {
@@ -1049,7 +1049,7 @@ const copyToClipboard = async (text: string) => {
 }
 
 .code-block code {
-  font-family: 'Monaco', 'Menlo', monospace;
+  font-family: "Zhuque Fangsong (technical preview)", "Noto Sans SC", sans-serif;
   font-size: 0.875rem;
   line-height: 1.5;
   color: hsl(var(--foreground));
@@ -1107,7 +1107,7 @@ const copyToClipboard = async (text: string) => {
   background: hsl(var(--background));
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
-  font-family: 'Monaco', 'Menlo', monospace;
+  font-family: "Zhuque Fangsong (technical preview)", "Noto Sans SC", sans-serif;
   font-size: 0.875rem;
   margin-left: auto;
 }
@@ -1169,7 +1169,7 @@ const copyToClipboard = async (text: string) => {
   background: hsl(var(--background));
   padding: 0.125rem 0.375rem;
   border-radius: 4px;
-  font-family: 'Monaco', 'Menlo', monospace;
+  font-family: "Zhuque Fangsong (technical preview)", "Noto Sans SC", sans-serif;
   font-size: 0.75rem;
 }
 
@@ -1213,7 +1213,7 @@ const copyToClipboard = async (text: string) => {
   padding: 0.25rem 0.75rem;
   border-radius: 4px;
   font-weight: 600;
-  font-family: 'Monaco', 'Menlo', monospace;
+  font-family: "Zhuque Fangsong (technical preview)", "Noto Sans SC", sans-serif;
   min-width: 50px;
   text-align: center;
   border: 1px solid #991b1b;

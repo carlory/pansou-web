@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { SearchParams } from '@/api';
-import { Button, Input, Icons } from '@/components/ui';
+import { Icons } from '@/components/ui';
 
 const keyword = ref('');
 const loading = ref(false);
@@ -36,13 +36,20 @@ const handleSearch = () => {
 
 <template>
   <div class="w-full max-w-content mx-auto">
+    <div class="text-center mb-8 mt-20">
+        <p class="text-4xl md:text-5xl lg:text-6xl font-bold mb-2 transition-all flex items-center justify-center gap-2">
+          <img src="/favicon.ico" alt="清羽盘搜" class="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14" />
+          清羽盘搜
+        </p>
+        <p class="text-sm md:text-base lg:text-lg text-muted-foreground/80 transition-all">清羽飞扬自建聚合网盘搜索</p>
+      </div>
     <div class="relative w-full">
       <div class="relative flex flex-row items-center w-full">
         <div class="relative w-full">
           <input
             v-model="keyword"
             type="text"
-            placeholder="搜索资源、电影、音乐、软件..."
+            placeholder="搜索任意你想获得的资源，包括但不限于：文件、视频、音频、软件、游戏等"
             :disabled="loading"
             @keydown.enter="handleSearch"
             class="flex h-10 outline-none focus:outline-none rounded-md border bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 w-full text-center pr-12 transition-all duration-300 border-primary/20 hover:border-primary/40 shadow-sm hover:shadow-md focus-visible:shadow-lg focus-visible:ring-primary/30 focus-visible:ring-offset-0 focus-visible:border-primary/60"

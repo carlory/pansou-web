@@ -46,6 +46,10 @@ const switchToDocs = () => {
   currentPage.value = 'docs';
 };
 
+const switchToHome = () => {
+  window.open('https://www.liushen.fun/', '_blank');
+};
+
 
 
 // 处理搜索
@@ -343,31 +347,29 @@ onUnmounted(() => {
     <nav class="nav-header backdrop-blur-md bg-background/80 border-b border-border">
       <div class="container mx-auto px-4 h-16 flex items-center justify-between">
         <div class="flex items-center gap-3 cursor-pointer" @click="resetToInitial">
-          <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-            <svg class="w-5 h-5 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center">
+            <svg t="1755163867101" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6270"><path d="M351.1808 59.2896A435.2 435.2 0 0 1 805.376 715.264 460.8 460.8 0 0 1 351.1808 59.3408z" fill="#20C997" p-id="6271"></path><path d="M754.3808 722.2272a358.4 358.4 0 1 0-267.8272 120.2176 51.2 51.2 0 0 1 0 102.4 460.8 460.8 0 1 1 365.1584-179.712l118.8864 121.2416c23.7568 24.2176 23.552 63.0272-0.4096 87.04l-0.4096 0.4096a61.184 61.184 0 0 1-86.9888-0.4608l-148.0192-150.9376a61.7984 61.7984 0 0 1 0.4096-86.9888l0.4096-0.4096c5.632-5.5808 11.9808-9.8304 18.7904-12.8z m-467.968-364.5952h409.6a51.2 51.2 0 1 1 0 102.4h-409.6a51.2 51.2 0 1 1 0-102.4z m0 204.8h256a51.2 51.2 0 0 1 0 102.4h-256a51.2 51.2 0 1 1 0-102.4z" fill="#2C6DD2" p-id="6272"></path></svg>
           </div>
           <div>
-            <h1 class="text-xl font-bold">PanSou</h1>
+            <h1 class="text-xl font-bold">清羽盘搜</h1>
           </div>
         </div>
         
         <!-- 导航菜单 -->
-        <nav class="flex items-center gap-2" v-if="currentPage === 'search'">
+        <nav class="hidden md:flex items-center gap-2">
           <button 
             @click="switchToStatus"
             class="nav-button"
           >
             <span class="nav-icon">📊</span>
-            状态
+            状态面板
           </button>
           <button 
-            @click="switchToDocs"
+            @click="switchToHome"
             class="nav-button"
           >
-            <span class="nav-icon">📖</span>
-            API文档
+            <span class="nav-icon">👨‍💻</span>
+            站长主页
           </button>
         </nav>
       </div>
@@ -432,14 +434,72 @@ onUnmounted(() => {
     
     <!-- 页脚 -->
     <footer class="border-t border-border bg-background/50 backdrop-blur-sm mt-auto">
-      <div class="container mx-auto px-4 py-4">
-        <div class="flex items-center justify-center gap-4 text-sm text-muted-foreground">
-          <span>© {{ new Date().getFullYear() }}-{{ new Date().getFullYear() + 10 }}</span>
-          <a href="https://dm.xueximeng.com/" target="_blank" rel="noopener noreferrer" class="hover:text-foreground transition-colors">美漫资源共建</a>
-          <a href="https://github.com/fish2018" target="_blank" rel="noopener noreferrer" class="hover:text-foreground transition-colors">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-            </svg>
+      <div class="container mx-auto px-4 py-3 md:py-6">
+        <!-- 第一行链接 - 在移动端隐藏 -->
+        <div class="hidden md:flex flex-row items-center justify-center text-sm text-muted-foreground">
+          <span class="flex items-center">
+            © 2023-{{ new Date().getFullYear() }}
+          </span>
+          <div class="mx-3 text-border">|</div>
+          <a @click="switchToDocs" class="hover:text-foreground transition-colors cursor-pointer">
+            API文档
+          </a>
+          <div class="mx-3 text-border">|</div>
+          <a href="https://github.com/willow-god/pansou-web" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="hover:text-foreground transition-colors">
+            项目仓库
+          </a>
+        </div>
+
+        <!-- 第二行链接 - 在移动端隐藏 -->
+        <div class="hidden md:flex flex-row items-center justify-center mt-3 text-sm text-muted-foreground">
+          <span>
+            Build by 
+            <a href="https://www.liushen.fun/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="hover:text-foreground transition-colors">
+              LiuShen
+            </a>
+          </span>
+          <div class="mx-3 text-border">|</div>
+          <span>
+            Powered by 
+            <a href="https://github.com/fish2018/pansou" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="hover:text-foreground transition-colors">
+              PanSou
+            </a>
+          </span>
+          <div class="mx-3 text-border">|</div>
+          <span>
+            License 
+            <a href="https://github.com/fish2018/pansou-web/blob/main/LICENSE" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="hover:text-foreground transition-colors">
+              MIT
+            </a>
+          </span>
+        </div>
+
+        <!-- 备案信息 - 始终显示 -->
+        <div class="flex flex-col md:flex-row items-center justify-center space-y-1 md:space-y-0 mt-2 md:mt-3 text-sm text-muted-foreground">
+          <a href="https://beian.miit.gov.cn/" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="hover:text-foreground transition-colors">
+            陕ICP备2024028531号
+          </a>
+          <div class="hidden md:block mx-3 text-border">|</div>
+          <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=61011602000637" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="hover:text-foreground transition-colors">
+            陕公网安备61011602000637号
           </a>
         </div>
       </div>

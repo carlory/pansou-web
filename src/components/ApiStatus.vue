@@ -84,7 +84,7 @@ onMounted(() => {
     <div class="status-header">
       <h1 class="status-title">
         <span class="title-icon">📊</span>
-        PanSou API 状态监控
+        清羽盘搜 API 状态监控
       </h1>
     </div>
 
@@ -105,15 +105,15 @@ onMounted(() => {
     <!-- 状态信息 -->
     <div v-else-if="healthData" class="status-content">
       <!-- 系统状态卡片 -->
-      <div class="status-card">
+      <div class="system-status-card">
         <div class="card-header">
           <h2 class="card-title">
             <span class="status-indicator" :class="{ 'healthy': healthData.status === 'ok' }"></span>
             系统状态
+            <div class="status-badge" :class="{ 'healthy': healthData.status === 'ok' }">
+              {{ healthData.status === 'ok' ? '正常' : '异常' }}
+            </div>
           </h2>
-          <div class="status-badge" :class="{ 'healthy': healthData.status === 'ok' }">
-            {{ healthData.status === 'ok' ? '正常' : '异常' }}
-          </div>
         </div>
         
         <div class="card-content">
@@ -126,30 +126,13 @@ onMounted(() => {
               <span class="status-label">插件:</span>
               <span class="status-value">{{ healthData.plugins_enabled ? '已启用' : '已禁用' }}</span>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 频道配置卡片 -->
-      <div class="status-card">
-        <div class="card-header">
-          <h2 class="card-title">
-            <span class="channel-icon">📡</span>
-            TG 频道配置
-            <span class="count-badge">{{ healthData.channels.length }}</span>
-          </h2>
-        </div>
-        
-        <div class="card-content">
-          <div class="channels-container">
-            <div class="channels-grid">
-              <div 
-                v-for="channel in healthData.channels" 
-                :key="channel"
-                class="channel-tag"
-              >
-                {{ channel }}
-              </div>
+            <div class="status-item">
+              <span class="status-label">插件数量:</span>
+              <span class="status-value">{{ healthData.plugin_count }}</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">频道数量:</span>
+              <span class="status-value">{{ healthData.channels.length }}</span>
             </div>
           </div>
           
@@ -170,7 +153,6 @@ onMounted(() => {
             </div>
           </div>
           
-          <!-- 复制按钮放到底部 -->
           <div class="card-actions">
             <button 
               @click="copyEnvVariable" 
@@ -184,25 +166,42 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- 插件状态卡片 -->
-      <div class="status-card">
-        <div class="card-header">
-          <h2 class="card-title">
-            <span class="plugin-icon">🧩</span>
-            已加载插件
-            <span class="count-badge">{{ healthData.plugin_count }}</span>
-          </h2>
-        </div>
+      <!-- TG频道卡片区 -->
+      <div class="channels-section">
+        <h2 class="section-title">
+          <span class="channel-icon">📡</span>
+          TG 频道配置
+          <span class="count-badge">{{ healthData.channels.length }}</span>
+        </h2>
         
-        <div class="card-content">
-          <div class="plugins-grid">
-            <div 
-              v-for="plugin in healthData.plugins" 
-              :key="plugin"
-              class="plugin-tag"
-            >
-              {{ plugin }}
-            </div>
+        <div class="channels-grid">
+          <div 
+            v-for="channel in healthData.channels" 
+            :key="channel"
+            class="channel-card"
+          >
+            <div class="channel-name">{{ channel }}</div>
+            <div class="channel-status">已启用</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 插件卡片区 -->
+      <div class="plugins-section">
+        <h2 class="section-title">
+          <span class="plugin-icon">🧩</span>
+          已加载插件
+          <span class="count-badge">{{ healthData.plugin_count }}</span>
+        </h2>
+        
+        <div class="plugins-grid">
+          <div 
+            v-for="plugin in healthData.plugins" 
+            :key="plugin"
+            class="plugin-card"
+          >
+            <div class="plugin-name">{{ plugin }}</div>
+            <div class="plugin-status">已加载</div>
           </div>
         </div>
       </div>
@@ -212,7 +211,7 @@ onMounted(() => {
 
 <style scoped>
 .api-status-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
   background: #f8fafc;
@@ -241,8 +240,6 @@ onMounted(() => {
 .title-icon {
   font-size: 2.5rem;
 }
-
-
 
 /* 加载和错误状态 */
 .loading-state, .error-state {
@@ -282,21 +279,22 @@ onMounted(() => {
 
 /* 状态内容 */
 .status-content {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-/* 卡片样式 */
-.status-card {
+/* 系统状态卡片 */
+.system-status-card {
   background: white;
   border-radius: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 100%;
 }
 
-.status-card:hover {
+.system-status-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
@@ -308,7 +306,6 @@ onMounted(() => {
   padding: 1.25rem 1.5rem;
   border-bottom: 1px solid #e2e8f0;
   background: #f8fafc;
-  min-height: 4rem;
 }
 
 .card-title {
@@ -330,6 +327,8 @@ onMounted(() => {
   height: 0.75rem;
   border-radius: 50%;
   margin-right: 0.5rem;
+  background: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.3);
 }
 
 .status-indicator.healthy {
@@ -342,6 +341,8 @@ onMounted(() => {
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 500;
+  background: #fee2e2;
+  color: #b91c1c;
 }
 
 .status-badge.healthy {
@@ -351,21 +352,19 @@ onMounted(() => {
 
 /* 状态信息布局 */
 .status-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .status-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #f3f4f6;
-}
-
-.status-item:last-child {
-  border-bottom: none;
+  padding: 0.75rem;
+  background: #f9fafb;
+  border-radius: 0.5rem;
 }
 
 .status-label {
@@ -387,11 +386,12 @@ onMounted(() => {
   padding: 0.25rem 0.5rem;
   border-radius: 9999px;
   font-weight: 600;
+  margin-left: 0.5rem;
 }
 
 /* 环境变量折叠区域 */
 .env-section {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   border: 1px solid #e2e8f0;
   border-radius: 0.5rem;
   overflow: hidden;
@@ -436,7 +436,6 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   padding-top: 1rem;
-  border-top: 1px solid #f3f4f6;
 }
 
 /* 复制按钮 */
@@ -476,73 +475,105 @@ onMounted(() => {
   line-height: 1.4;
 }
 
-/* 频道容器 - 添加滑动条 */
-.channels-container {
-  max-height: 120px;
-  overflow-y: auto;
-  margin-bottom: 1rem;
-  padding-right: 0.5rem;
+/* 频道和插件区域 */
+.channels-section, .plugins-section {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  padding: 1.5rem;
 }
 
-.channels-container::-webkit-scrollbar {
-  width: 6px;
-}
-
-.channels-container::-webkit-scrollbar-track {
-  background: #f1f5f9;
-  border-radius: 3px;
-}
-
-.channels-container::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
-}
-
-.channels-container::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-/* 频道和插件网格 */
-.channels-grid, .plugins-grid {
-  display: grid;
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  display: flex;
+  align-items: center;
   gap: 0.5rem;
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-  grid-auto-rows: max-content;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-/* 插件容器 - 铺满显示 */
-.plugins-grid {
-  min-height: 120px;
-  max-height: 200px;
-  overflow-y: auto;
-  padding-right: 0.5rem;
-  align-content: start;
+/* 频道网格 */
+.channels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
 }
 
-.channel-tag, .plugin-tag {
-  padding: 0.5rem 0.75rem;
+.channel-card {
   background: #eff6ff;
-  color: #1e40af;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-align: center;
+  border-radius: 0.75rem;
+  padding: 1rem;
   border: 1px solid #bfdbfe;
   transition: all 0.2s ease;
 }
 
-.plugin-tag {
-  background: #f0fdf4;
-  color: #15803d;
-  border-color: #bbf7d0;
+.channel-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
 }
 
-.channel-tag:hover, .plugin-tag:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.channel-name {
+  font-weight: 600;
+  color: #1e40af;
+  margin-bottom: 0.5rem;
+  word-break: break-all;
+}
+
+.channel-status {
+  font-size: 0.75rem;
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+/* 插件网格 */
+.plugins-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.plugin-card {
+  background: #f0fdf4;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border: 1px solid #bbf7d0;
+  transition: all 0.2s ease;
+}
+
+.plugin-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+}
+
+.plugin-name {
+  font-weight: 600;
+  color: #15803d;
+  margin-bottom: 0.5rem;
+  word-break: break-all;
+}
+
+.plugin-status {
+  font-size: 0.75rem;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  display: inline-block;
 }
 
 /* 响应式设计 */
+@media (max-width: 1024px) {
+  .channels-grid, .plugins-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .api-status-container {
     padding: 1rem;
@@ -554,36 +585,36 @@ onMounted(() => {
     align-items: stretch;
   }
   
-  .status-content {
-    grid-template-columns: 1fr;
-  }
-  
-  .status-info {
-    gap: 0.5rem;
-  }
-  
-  .status-item {
-    padding: 0.375rem 0;
-  }
-  
   .status-title {
     font-size: 1.5rem;
     justify-content: center;
   }
   
-  .card-header {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: stretch;
+  .status-info {
+    grid-template-columns: 1fr;
   }
   
-  .channels-container {
-    max-height: 100px;
+  .channels-grid, .plugins-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .channels-grid, .plugins-grid {
+    grid-template-columns: 1fr;
   }
   
-  .plugins-grid {
-    min-height: 100px;
-    max-height: 150px;
+  .section-title {
+    font-size: 1.1rem;
   }
+  
+  .status-title {
+    font-size: 1.3rem;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>
