@@ -290,9 +290,7 @@ const getDiskName = (type: string) => {
   justify-content: center;
   padding: 3rem 1rem;
   text-align: center;
-  background-color: #fff;
   border-radius: 0.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .empty-icon {
@@ -345,8 +343,9 @@ const getDiskName = (type: string) => {
 }
 
 .results-container {
-  background-color: #fff;
+  background-color: #ffffffcc;
   border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }
@@ -354,8 +353,9 @@ const getDiskName = (type: string) => {
 .tabs {
   display: flex;
   overflow-x: auto;
+  overflow-y: hidden;
   border-bottom: 1px solid #e5e7eb;
-  background-color: #f9fafb;
+  background-color: #f9fafbcc;
   padding: 0 1rem;
 }
 
@@ -401,7 +401,7 @@ const getDiskName = (type: string) => {
 }
 
 .result-list {
-  max-height: 600px;
+  /* max-height: 600px; */
   overflow-y: auto;
   padding: 1rem;
 }
@@ -410,10 +410,11 @@ const getDiskName = (type: string) => {
   padding: 0.75rem;
   border-bottom: 1px solid #f3f4f6;
   transition: background-color 0.2s ease;
+  border-radius: 12px;
 }
 
 .result-item:hover {
-  background-color: #f9fafb;
+  background-color: #e2e2e2;
 }
 
 .result-row {

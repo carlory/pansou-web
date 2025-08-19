@@ -49,16 +49,18 @@ const handleSearch = () => {
           <input
             v-model="keyword"
             type="text"
+            name="search"
+            autocomplete="off"
             placeholder="搜索任意你想获得的资源，包括但不限于：文件、视频、音频、软件、游戏等"
             :disabled="loading"
             @keydown.enter="handleSearch"
-            class="flex h-10 outline-none focus:outline-none rounded-md border bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 w-full text-center pr-12 transition-all duration-300 border-primary/20 hover:border-primary/40 shadow-sm hover:shadow-md focus-visible:shadow-lg focus-visible:ring-primary/30 focus-visible:ring-offset-0 focus-visible:border-primary/60"
+            class="flex h-10 outline-none focus:outline-none rounded-full border bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 w-full text-center pr-12 transition-all duration-300 border-primary/20 hover:border-primary/40 shadow-sm hover:shadow-md focus-visible:shadow-lg focus-visible:ring-primary/30 focus-visible:ring-offset-0 focus-visible:border-primary/60"
           />
           <button
             type="button"
             @click="handleSearch"
             :disabled="loading || !keyword.trim()"
-            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 w-10 absolute right-0 top-0 h-full rounded-l-none transition-all duration-300 border-0 hover:border hover:border-l-0 hover:border-primary/40 hover:bg-primary hover:text-primary-foreground hover:scale-[1.03]"
+            class="m-1 inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 w-8 absolute right-0 top-0 h-8 transition-all duration-300 border-0 hover:border hover:border-l-0 hover:border-primary/40 hover:bg-primary hover:text-primary-foreground hover:scale-[1.03]"
           >
             <component 
               :is="loading ? Icons.Loading() : Icons.Send()" 

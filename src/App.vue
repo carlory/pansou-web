@@ -339,7 +339,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-background text-foreground transition-colors duration-300 flex flex-col">
+  <div class="min-h-screen bg-mine-background text-foreground transition-colors duration-300 flex flex-col">
     <!-- 背景装饰 -->
     <div class="bg-decorative"></div>
     
