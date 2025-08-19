@@ -11,4 +11,4 @@
     "types": ["node"],
     "lib": ["ES2020", "DOM", "DOM.Iterable"]
   }
-} 
+}
