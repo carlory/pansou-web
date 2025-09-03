@@ -1,11 +1,11 @@
 // 网盘类型映射
 export const diskTypeMap: Record<string, string> = {
+  'quark': '夸克',
   'baidu': '百度',
   'aliyun': '阿里',
   '115': '115',
   '123': '123',
   'xunlei': '迅雷',
-  'quark': '夸克',
   'mobile': '移动',
   'tianyi': '天翼',
   'uc': 'UC',
